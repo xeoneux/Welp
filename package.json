@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "NODE_ENV=development ./node_modules/.bin/hjs-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/xeoneux/Welp#readme",
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "babel-core": "^6.9.0",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
@@ -25,9 +27,11 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.23.1",
+    "cssnano": "^3.6.2",
     "file-loader": "^0.8.5",
     "hjs-webpack": "^8.2.0",
     "postcss-loader": "^0.9.1",
+    "precss": "^1.4.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1"

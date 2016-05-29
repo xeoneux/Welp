@@ -21,6 +21,34 @@ var config = getConfig({
     clearBeforeBuild: true
 });
 
+const cssModulesNames = `${isDev ? '[path][name]__[local]__' : ''}[hash:base64:5]`;
+
+const findLoader = (loaders, match) => {
+    const found = loaders.filter(l => l &&
+    l.loader && l.loader.match(match));
+    return found ? found[0] : null;
+};
+const cssloader = findLoader(config.module.loaders, /(^|!)(css-loader)($|!)/);
+
+const newloader = Object.assign({}, cssloader, {
+    test: /\.module\.css$/,
+    include: [src],
+    loader: cssloader.loader
+        .replace(matchCssLoaders,
+            `$1$2?modules&localIdentName=${cssModulesNames}$3`)
+});
+
+config.module.loaders.push(newloader);
+
+cssloader.test = new RegExp(`[^module]${cssloader.test.source}`);
+cssloader.loader = newloader.loader;
+
+config.module.loaders.push({
+    test: /\.css$/,
+    include: [modules],
+    loader: 'style!css'
+});
+
 config.postcss = [].concat([
     require('precss')({}),
     require('autoprefixer')({}),

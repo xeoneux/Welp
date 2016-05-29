@@ -21,6 +21,8 @@ var config = getConfig({
     clearBeforeBuild: true
 });
 
+const matchCssLoaders = /(^|!)(css-loader)($|!)/;
+
 const cssModulesNames = `${isDev ? '[path][name]__[local]__' : ''}[hash:base64:5]`;
 
 const findLoader = (loaders, match) => {
@@ -28,7 +30,7 @@ const findLoader = (loaders, match) => {
     l.loader && l.loader.match(match));
     return found ? found[0] : null;
 };
-const cssloader = findLoader(config.module.loaders, /(^|!)(css-loader)($|!)/);
+const cssloader = findLoader(config.module.loaders, matchCssLoaders);
 
 const newloader = Object.assign({}, cssloader, {
     test: /\.module\.css$/,

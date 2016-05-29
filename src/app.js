@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom'
 
 import './app.css'
 import styles from './styles.module.css'
+import 'font-awesome/css/font-awesome.css'
 
 const App = React.createClass({
-    render: function () {
+    render: function() {
         return (
             <div className={styles.wrapper}>
-                <h1>Environment: {__NODE_ENV__}</h1>
+                <h1>
+                    <i className="fa fa-star"></i>
+                    Environment: {__NODE_ENV__}</h1>
             </div>
         )
     }

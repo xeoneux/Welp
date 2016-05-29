@@ -79,4 +79,12 @@ config.postcss = [].concat([
     require('cssnano')({})
 ]);
 
+config.resolve.root = [src, modules];
+config.resolve.alias = {
+    'css': join(src, 'styles'),
+    'utils': join(src, 'utils'),
+    'components': join(src, 'components'),
+    'containers': join(src, 'containers')
+};
+
 module.exports = config;

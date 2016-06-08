@@ -1,6 +1,8 @@
 import React from 'react'
-import {searchNearby} from 'utils/googleApiHelpers'
 import Map, {GoogleApiWrapper} from 'google-maps-react'
+
+import Header from 'components/Header/Header'
+import {searchNearby} from 'utils/googleApiHelpers'
 
 export class Container extends React.Component {
     constructor(props) {
@@ -40,6 +42,8 @@ export class Container extends React.Component {
                     onReady={this.onReady.bind(this)}
                     google={this.props.google}
                     visible={false}>
+
+                    <Header />
 
                     {
                         this.state.places.map(place => {

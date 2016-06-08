@@ -60,6 +60,7 @@
     "yargs": "^4.7.1"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "font-awesome": "^4.6.3",
     "google-maps-react": "^1.0.13",
     "react": "^15.1.0",

@@ -16,6 +16,10 @@ export class Container extends React.Component {
         };
     }
 
+    onMarkerClick(item) {
+        const {place} = item;
+    }
+
     onReady(mapProps, map) {
         const {google} = this.props;
         const opts = {
@@ -44,7 +48,8 @@ export class Container extends React.Component {
                 {
                     google: this.props.google,
                     places: this.state.places,
-                    loaded: this.props.loaded
+                    loaded: this.props.loaded,
+                    onMarkerClick: this.onMarkerClick.bind(this)
                 });
         }
         return (

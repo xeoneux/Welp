@@ -13,6 +13,7 @@ export class MapComponent extends React.Component {
             return <Marker key={place.id}
                            name={place.id}
                            position={place.geometry.location}
+                           onClick={this.props.onMarkerClick.bind(this)}
             />
         });
     }

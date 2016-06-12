@@ -1,10 +1,14 @@
 import React, {PropTypes as T} from 'react'
+import classnames from 'classnames'
 
 import {getDetails} from 'utils/googleApiHelpers'
-
 import styles from './styles.module.css'
 
 export class Detail extends React.Component {
+    static childContextTypes = {
+        router: T.object
+    };
+
     constructor(props, context) {
         super(props, context);
 
@@ -67,17 +71,18 @@ export class Detail extends React.Component {
 
     render() {
         if (this.state.loading) {
-            return (
-                <div className={styles.wrapper}>
-                    Loading...
-                </div>
-            );
+            return (<div className={styles.wrapper}>
+                Loading...
+            </div>)
         }
         const {place} = this.state;
         return (
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <h2>{place.name}</h2>
+                </div>
+                <div className={styles.details}>
+                    {this.renderPhotos(place)}
                 </div>
             </div>
         );

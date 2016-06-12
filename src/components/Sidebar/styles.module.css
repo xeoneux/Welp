@@ -3,18 +3,22 @@
 
 .sidebar {
   height: 100%;
-  top: var(--height);
+  top: var(--topbar-height);
   left: 0;
   overflow: hidden;
 
   position: relative;
-  flex: 1;
   z-index: 0;
+
+  flex-direction: column;
+  order: 2;
+  flex: 1;
 
   @media (--screen-phone-lg) {
     display: block;
     flex-direction: row;
     order: 1;
+    flex: 1;
   }
 
   .heading {

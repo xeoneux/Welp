@@ -7,7 +7,7 @@ export class Header extends React.Component {
     render() {
         return (
             <div className={styles.topbar}>
-                <Link to="/"><h1>Welp</h1></Link>
+                <Link className={styles.logo} to="/"><h1>Welp</h1></Link>
                 <section>
                     Places
                 </section>

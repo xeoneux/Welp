@@ -16,6 +16,20 @@ export class Detail extends React.Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.map) {
+            this.getDetails(this.props.map);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.map &&  // make sure we have a map
+            (prevProps.map !== this.props.map ||
+            prevProps.params.placeId !== this.props.params.placeId)) {
+            this.getDetails(this.props.map);
+        }
+    }
+
     getDetails(map) {
         const {google, params} = this.props;
         const {placeId} = params;
@@ -39,8 +53,18 @@ export class Detail extends React.Component {
     }
 
     render() {
+        if (this.state.loading) {
+            return (
+                <div className={styles.wrapper}>
+                    Loading...
+                </div>
+            );
+        }
+        const {place} = this.state;
         return (
-            <div className={styles.details}></div>
+            <div className={styles.wrapper}>
+                <h2>{place.name}</h2>
+            </div>
         );
     }
 }

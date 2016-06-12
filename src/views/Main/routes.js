@@ -1,5 +1,5 @@
 import React from 'react'
-import {Route} from 'react-router'
+import {IndexRoute, Route} from 'react-router'
 
 import Map from './Map/Map'
 import Container from './Container'

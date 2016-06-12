@@ -3,6 +3,7 @@ import {Route} from 'react-router'
 
 import Map from './Map/Map'
 import Container from './Container'
+import Detail from "./Detail/Detail";
 
 export const makeMainRoutes = () => {
     return (
@@ -10,6 +11,7 @@ export const makeMainRoutes = () => {
             <Route path="map" component={Map}/>
             <Route path="detail/:placeId"
                    component={Detail}/>
+            <IndexRoute component={Map} />
         </Route>
     );
 };

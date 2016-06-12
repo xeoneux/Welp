@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {browserHistory, Router, Route} from 'react-router'
+import {browserHistory} from 'react-router'
 
 import './app.css'
 import 'font-awesome/css/font-awesome.css'

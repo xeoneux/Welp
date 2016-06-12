@@ -18,6 +18,8 @@ export class Container extends React.Component {
 
     onMarkerClick(item) {
         const {place} = item;
+        const {push} = this.context.router;
+        push(`/map/detail/${place.place_id}`);
     }
 
     onReady(mapProps, map) {
@@ -76,6 +78,10 @@ export class Container extends React.Component {
         );
     }
 }
+
+Container.contextTypes = {
+    router: React.PropTypes.object
+};
 
 export default GoogleApiWrapper({
     apiKey: __GAPI_KEY__

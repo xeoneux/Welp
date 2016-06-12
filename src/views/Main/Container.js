@@ -7,8 +7,8 @@ import Sidebar from 'components/Sidebar/Sidebar'
 import {searchNearby} from 'utils/googleApiHelpers'
 
 export class Container extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.state = {
             places: [],
@@ -23,23 +23,22 @@ export class Container extends React.Component {
     }
 
     onReady(mapProps, map) {
-        const {google} = this.props;
-        const opts = {
-            location: map.center,
-            radius: '500',
-            types: ['cafe']
-        };
-
-        searchNearby(google, map, opts)
-            .then((results, pagination) => {
-                this.setState({
-                    places: results,
-                    pagination
-                });
+        searchNearby(
+            this.props.google,
+            map,
+            {
+                location: map.center,
+                radius: '500',
+                types: ['cafe']
+            }
+        ).then((results, pagination) => {
+            this.setState({
+                places: results,
+                pagination
             })
-            .catch((status, result) => {
-
-            });
+        }).catch((status) => {
+            console.log('error fetching nearby', status)
+        });
     }
 
     render() {
@@ -48,33 +47,32 @@ export class Container extends React.Component {
             children = React.cloneElement(
                 this.props.children,
                 {
+                    zoom: this.props.zoom,
                     google: this.props.google,
                     places: this.state.places,
                     loaded: this.props.loaded,
+                    router: this.context.router,
                     onMarkerClick: this.onMarkerClick.bind(this)
                 });
         }
         return (
-            <div>
-                Hello from the container
-                <Map
-                    onReady={this.onReady.bind(this)}
-                    google={this.props.google}
-                    className={styles.wrapper}
-                    visible={false}>
+            <Map
+                google={this.props.google}
+                onReady={this.onReady.bind(this)}
+                visible={false}
+                className={styles.wrapper}>
+                <Header />
 
-                    <Header />
-                    <Sidebar
-                        title={'Restaurants'}
-                        places={this.state.places}
-                    />
+                <Sidebar
+                    title={'Restaurants'}
+                    onListItemClick={this.onMarkerClick.bind(this)}
+                    places={this.state.places}/>
 
-                    <div className={styles.content}>
-                        {children}
-                    </div>
+                <div className={styles.content}>
+                    {children}
+                </div>
 
-                </Map>
-            </div>
+            </Map>
         );
     }
 }
